@@ -21,28 +21,30 @@ L'intégration supporte plusieurs langues et s'adapte automatiquement à la lang
 
 Les noms des sensors et binary sensors sont automatiquement traduits selon la langue système.
 
+![Illustration des capteurs](illustration.png)
+
 ### Sensors (12)
 
 - 💧 **Consommation d'eau** - Volume d'eau consommé aujourd'hui (L)
-- 🔄 **Régénérations** - Nombre de régénérations aujourd'hui
+- 🕐 **Dernière connexion** - Horodatage de la dernière connexion de l'appareil
 - 📊 **Dureté d'entrée** - Dureté de l'eau en entrée (°f)
 - 📉 **Dureté de sortie** - Dureté de l'eau en sortie (°f)
-- 🔧 **Pression réseau** - Pression du réseau d'eau (bar)
-- 🕐 **Dernière connexion** - Horodatage de la dernière connexion de l'appareil
-- 🔢 **Numéro de série** - Numéro de série de l'appareil
 - 📅 **Mise en service** - Date d'installation de l'appareil
 - ✈️ **Mode vacances** - Statut du mode vacances (Actif/Inactif)
-- 🧂 **Type de sel** - Type de sel configuré (Tablettes/Grains)
+- 🔢 **Numéro de série** - Numéro de série de l'appareil
 - ⏰ **Heure régénération** - Heure de début de régénération programmée
+- 🔧 **Pression réseau** - Pression du réseau d'eau (bar)
+- 🔄 **Régénérations** - Nombre de régénérations aujourd'hui
 - 📶 **Signal WiFi** - Puissance du signal WiFi (dBm)
+- 🧂 **Type de sel** - Type de sel configuré (Tablettes/Grains)
 
 ### Binary Sensors (5)
 
+- 🚨 **Alarme sel** - Niveau de sel bas détecté
 - ✅ **Connecté** - Statut de connexion WiFi de l'appareil
-- 🌐 **En ligne** - Appareil en ligne sur le réseau
 - 🔌 **Connectable** - Appareil accessible
 - ⚡ **Coupure de courant** - Coupure de courant détectée aujourd'hui
-- 🚨 **Alarme sel** - Niveau de sel bas détecté
+- 🌐 **En ligne** - Appareil en ligne sur le réseau
 
 ## Installation
 
