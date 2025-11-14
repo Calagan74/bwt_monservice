@@ -1,0 +1,90 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configuration BWT MonService",
+        "description": "Configurez votre intégration BWT MonService",
+        "data": {
+          "username": "Email",
+          "password": "Mot de passe"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Identifiants invalides",
+      "cannot_connect": "Impossible de se connecter au service BWT",
+      "unknown": "Erreur inconnue"
+    },
+    "abort": {
+      "already_configured": "Ce compte est déjà configuré"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options BWT MonService",
+        "description": "Configurez les options de l'intégration",
+        "data": {
+          "scan_interval": "Intervalle de mise à jour (minutes)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "water_consumption": {
+        "name": "Consommation eau"
+      },
+      "regenerations_today": {
+        "name": "Régénérations"
+      },
+      "hardness_in": {
+        "name": "Dureté entrée"
+      },
+      "hardness_out": {
+        "name": "Dureté sortie"
+      },
+      "water_pressure": {
+        "name": "Pression réseau"
+      },
+      "last_seen": {
+        "name": "Dernière connexion"
+      },
+      "serial_number": {
+        "name": "Numéro série"
+      },
+      "service_date": {
+        "name": "Mise en service"
+      },
+      "holiday_mode": {
+        "name": "Mode vacances"
+      },
+      "salt_type": {
+        "name": "Type de sel"
+      },
+      "regen_start_hour": {
+        "name": "Heure régénération"
+      },
+      "wifi_signal": {
+        "name": "Signal WiFi"
+      }
+    },
+    "binary_sensor": {
+      "connected": {
+        "name": "Connecté"
+      },
+      "online": {
+        "name": "En ligne"
+      },
+      "connectable": {
+        "name": "Connectable"
+      },
+      "power_outage": {
+        "name": "Coupure courant"
+      },
+      "salt_alarm": {
+        "name": "Alarme sel"
+      }
+    }
+  }
+}

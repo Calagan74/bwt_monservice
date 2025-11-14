@@ -1,0 +1,90 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "BWT MonService Configuration",
+        "description": "Configure your BWT MonService integration",
+        "data": {
+          "username": "Email",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid credentials",
+      "cannot_connect": "Cannot connect to BWT service",
+      "unknown": "Unknown error"
+    },
+    "abort": {
+      "already_configured": "This account is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "BWT MonService Options",
+        "description": "Configure integration options",
+        "data": {
+          "scan_interval": "Update interval (minutes)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "water_consumption": {
+        "name": "Water consumption"
+      },
+      "regenerations_today": {
+        "name": "Regenerations"
+      },
+      "hardness_in": {
+        "name": "Input hardness"
+      },
+      "hardness_out": {
+        "name": "Output hardness"
+      },
+      "water_pressure": {
+        "name": "Water pressure"
+      },
+      "last_seen": {
+        "name": "Last seen"
+      },
+      "serial_number": {
+        "name": "Serial number"
+      },
+      "service_date": {
+        "name": "Service date"
+      },
+      "holiday_mode": {
+        "name": "Holiday mode"
+      },
+      "salt_type": {
+        "name": "Salt type"
+      },
+      "regen_start_hour": {
+        "name": "Regeneration hour"
+      },
+      "wifi_signal": {
+        "name": "WiFi signal"
+      }
+    },
+    "binary_sensor": {
+      "connected": {
+        "name": "Connected"
+      },
+      "online": {
+        "name": "Online"
+      },
+      "connectable": {
+        "name": "Connectable"
+      },
+      "power_outage": {
+        "name": "Power outage"
+      },
+      "salt_alarm": {
+        "name": "Salt alarm"
+      }
+    }
+  }
+}
