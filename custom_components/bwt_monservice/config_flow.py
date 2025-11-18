@@ -6,9 +6,8 @@ from typing import Any
 
 import aiohttp
 import voluptuous as vol
-
 from homeassistant import config_entries
-from homeassistant.const import CONF_PASSWORD, CONF_SCAN_INTERVAL, CONF_USERNAME
+from homeassistant.const import CONF_HOST, CONF_PASSWORD, CONF_SCAN_INTERVAL, CONF_USERNAME
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.data_entry_flow import FlowResult
 import homeassistant.helpers.config_validation as cv
@@ -99,11 +98,15 @@ class BWTConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 await self.async_set_unique_id(info["receipt_line_key"])
                 self._abort_if_unique_id_configured()
 
-                # Store only credentials (receipt_line_key will be fetched during setup)
+                # Store credentials and optional host
                 data = {
                     CONF_USERNAME: user_input[CONF_USERNAME],
                     CONF_PASSWORD: user_input[CONF_PASSWORD],
                 }
+
+                # Add optional host if provided
+                if user_input.get(CONF_HOST):
+                    data[CONF_HOST] = user_input[CONF_HOST]
 
                 # Create entry
                 return self.async_create_entry(
@@ -126,6 +129,7 @@ class BWTConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             {
                 vol.Required(CONF_USERNAME): str,
                 vol.Required(CONF_PASSWORD): str,
+                vol.Optional(CONF_HOST, default=""): str,
             }
         )
 

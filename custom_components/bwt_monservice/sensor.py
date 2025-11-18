@@ -14,7 +14,7 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import UnitOfPressure, UnitOfVolume
+from homeassistant.const import CONF_HOST, UnitOfPressure, UnitOfVolume
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -160,7 +160,7 @@ async def async_setup_entry(
     coordinator: BWTDataUpdateCoordinator = data["coordinator"]
 
     # Create device info
-    device_info = _get_device_info(coordinator)
+    device_info = _get_device_info(coordinator, entry)
 
     # Create sensor entities
     entities = [
@@ -171,7 +171,7 @@ async def async_setup_entry(
     async_add_entities(entities)
 
 
-def _get_device_info(coordinator: BWTDataUpdateCoordinator) -> dict[str, Any]:
+def _get_device_info(coordinator: BWTDataUpdateCoordinator, entry: ConfigEntry) -> dict[str, Any]:
     """Get device info from coordinator data."""
     data = coordinator.data
     device_name = data.get("device_name", "BWT Device")
@@ -185,13 +185,22 @@ def _get_device_info(coordinator: BWTDataUpdateCoordinator) -> dict[str, Any]:
         # Use device name as model if it's not the default
         model = device_name if device_name != "BWT Device" else None
 
-    return {
+    # Get optional host for configuration_url
+    host = entry.data.get(CONF_HOST)
+
+    device_info = {
         "identifiers": {(DOMAIN, serial_number)},
         "name": device_name,
         "manufacturer": MANUFACTURER,
         "model": model,
         "serial_number": serial_number,
     }
+
+    # Add configuration_url if host is provided
+    if host:
+        device_info["configuration_url"] = f"http://{host}"
+
+    return device_info
 
 
 class BWTSensor(CoordinatorEntity[BWTDataUpdateCoordinator], SensorEntity):

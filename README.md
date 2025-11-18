@@ -104,6 +104,7 @@ Pour l'ajouter comme repository personnalisé :
 4. Saisir vos identifiants :
    - 📧 **Email** : votre adresse email BWT MonService
    - 🔑 **Mot de passe** : votre mot de passe BWT MonService
+   - 🌐 **Adresse IP** (optionnel) : IP locale de votre appareil BWT pour accès direct via bouton "Visit"
 
 ### Options de configuration
 

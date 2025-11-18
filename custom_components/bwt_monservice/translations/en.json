@@ -6,7 +6,8 @@
         "description": "Configure your BWT MonService integration",
         "data": {
           "username": "Email",
-          "password": "Password"
+          "password": "Password",
+          "host": "Device IP address (optional)"
         }
       }
     },
