@@ -177,7 +177,7 @@ Ajouter dans `configuration.yaml` :
 utility_meter:
   bwt_regenerations_total:
     source: sensor.bwt_regenerations_today
-    cycle: none
+    cycle: daily
     name: "Régénérations totales"
 
   bwt_regenerations_monthly:
