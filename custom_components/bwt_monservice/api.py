@@ -1,7 +1,7 @@
 """API client for BWT MyService with persistent session."""
 import asyncio
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 import aiohttp
@@ -329,24 +329,42 @@ class BWTApiClient:
                 lines = history.get("lines", [])
 
                 if lines and len(lines) > 0:
-                    # Get only the first line (today's data)
-                    today_data = lines[0]
+                    # Cherche la ligne correspondant à la date du jour (YYYY-MM-DD)
+                    today_str = datetime.now(timezone.utc).date().isoformat()
+                    today_data = None
 
-                    # Map codes to values
-                    for i, code in enumerate(codes):
-                        if i < len(today_data):
-                            value = today_data[i]
+                    for line in lines:
+                        if not line:
+                            continue
+                        first_col = str(line[0])
+                        if first_col.startswith(today_str):
+                            today_data = line
+                            break
 
-                            if code == "date":
-                                data["data_date"] = value
-                            elif code == "regenCount":
-                                data["regen_count"] = value
-                            elif code == "powerOutage":
-                                data["power_outage"] = value
-                            elif code == "waterUse":
-                                data["water_use"] = value
-                            elif code == "saltAlarm":
-                                data["salt_alarm"] = value
+                    # Si pas de ligne pour aujourd'hui : définir des valeurs par défaut (zéros)
+                    if today_data is None:
+                        _LOGGER.debug("No history line for today (%s), setting default zeros", today_str)
+                        data["data_date"] = today_str
+                        data["regen_count"] = 0
+                        data["power_outage"] = 0
+                        data["water_use"] = 0
+                        data["salt_alarm"] = 0
+                    else:
+                        # Map codes to values from today's line
+                        for i, code in enumerate(codes):
+                            if i < len(today_data):
+                                value = today_data[i]
+
+                                if code == "date":
+                                    data["data_date"] = value
+                                elif code == "regenCount":
+                                    data["regen_count"] = value
+                                elif code == "powerOutage":
+                                    data["power_outage"] = value
+                                elif code == "waterUse":
+                                    data["water_use"] = value
+                                elif code == "saltAlarm":
+                                    data["salt_alarm"] = value
 
                 _LOGGER.debug("AJAX data extracted: %s", data)
                 return data
