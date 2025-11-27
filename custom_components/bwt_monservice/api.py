@@ -449,17 +449,17 @@ class BWTApiClient:
                     if not value:
                         continue
 
-                    if "dureté d'entrée" in label or "durete d'entree" in label:
+                    if "dureté d'entrée" in label or "durete d'entree" in label or "dureté d'entrée" in label:
                         try:
                             data["hardness_in"] = int(value)
                         except ValueError:
                             _LOGGER.debug("Failed to parse hardness_in value: %s", value)
-                    elif "dureté de sortie" in label or "durete de sortie" in label:
+                    elif "dureté de sortie" in label or "durete de sortie" in label or "dureté de sortie" in label:
                         try:
                             data["hardness_out"] = int(value)
                         except ValueError:
                             _LOGGER.debug("Failed to parse hardness_out value: %s", value)
-                    elif "pression du réseau" in label or "pression reseau" in label:
+                    elif "pression" in label and ("réseau" in label or "reseau" in label):
                         try:
                             data["water_pressure"] = int(value)
                         except ValueError:
@@ -468,7 +468,7 @@ class BWTApiClient:
                         data["holiday_mode"] = value
                     elif "type de sel" in label:
                         data["salt_type"] = value
-                    elif "heure de début de régénération" in label:
+                    elif "heure" in label and "régénération" in label:
                         data["regen_start_hour"] = value
                     elif "wi-fi" in label and "signal" in label:
                         try:
