@@ -39,15 +39,6 @@
       "regenerations_today": {
         "name": "Regenerations"
       },
-      "hardness_in": {
-        "name": "Input hardness"
-      },
-      "hardness_out": {
-        "name": "Output hardness"
-      },
-      "water_pressure": {
-        "name": "Water pressure"
-      },
       "last_seen": {
         "name": "Last seen"
       },
@@ -56,18 +47,6 @@
       },
       "service_date": {
         "name": "Service date"
-      },
-      "holiday_mode": {
-        "name": "Holiday mode"
-      },
-      "salt_type": {
-        "name": "Salt type"
-      },
-      "regen_start_hour": {
-        "name": "Regeneration hour"
-      },
-      "wifi_signal": {
-        "name": "WiFi signal"
       }
     },
     "binary_sensor": {

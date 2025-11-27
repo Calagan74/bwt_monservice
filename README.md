@@ -23,20 +23,21 @@ Les noms des sensors et binary sensors sont automatiquement traduits selon la la
 
 ![Illustration des capteurs](illustration.png)
 
-### Sensors (12)
+### Sensors (5)
 
 - 💧 **Consommation d'eau** - Volume d'eau consommé aujourd'hui (L)
-- 🕐 **Dernière connexion** - Horodatage de la dernière connexion de l'appareil
-- 📊 **Dureté d'entrée** - Dureté de l'eau en entrée (°f)
-- 📉 **Dureté de sortie** - Dureté de l'eau en sortie (°f)
-- 📅 **Mise en service** - Date d'installation de l'appareil
-- ✈️ **Mode vacances** - Statut du mode vacances (Actif/Inactif)
-- 🔢 **Numéro de série** - Numéro de série de l'appareil
-- ⏰ **Heure régénération** - Heure de début de régénération programmée
-- 🔧 **Pression réseau** - Pression du réseau d'eau (bar)
 - 🔄 **Régénérations** - Nombre de régénérations aujourd'hui
-- 📶 **Signal WiFi** - Puissance du signal WiFi (dBm)
-- 🧂 **Type de sel** - Type de sel configuré (Tablettes/Grains)
+- 🕐 **Dernière connexion** - Horodatage de la dernière connexion de l'appareil
+- 🔢 **Numéro de série** - Numéro de série de l'appareil
+- 📅 **Mise en service** - Date d'installation de l'appareil
+
+> **Note:** Les sensors suivants ont été retirés dans la version 1.2.0 suite à des changements dans la structure du site BWT MonService qui rendent leur extraction impossible :
+> - Dureté d'entrée / Dureté de sortie
+> - Pression réseau
+> - Mode vacances
+> - Type de sel
+> - Heure régénération
+> - Signal WiFi
 
 ### Binary Sensors (5)
 
@@ -177,7 +178,7 @@ Ajouter dans `configuration.yaml` :
 utility_meter:
   bwt_regenerations_total:
     source: sensor.bwt_regenerations_today
-    cycle: daily
+    cycle: none
     name: "Régénérations totales"
 
   bwt_regenerations_monthly:
@@ -196,12 +197,12 @@ entities:
     name: Consommation du jour
   - entity: sensor.bwt_regenerations_today
     name: Régénérations aujourd'hui
-  - entity: sensor.bwt_hardness_out
-    name: Dureté sortie
   - entity: binary_sensor.bwt_salt_alarm
     name: Niveau de sel
-  - entity: sensor.bwt_holiday_mode
-    name: Mode vacances
+  - entity: binary_sensor.bwt_connected
+    name: Connecté
+  - entity: sensor.bwt_last_seen
+    name: Dernière connexion
 ```
 
 ## Limitations connues
@@ -209,6 +210,7 @@ entities:
 - ❌ **Lecture seule** : Impossible de contrôler l'appareil (activer mode vacances, forcer régénération, **mais c'est voulu**)
 - ❌ **Un seul appareil** : Supporte uniquement le premier appareil du compte
 - ❌ **Données du jour** : Historique limité aux données d'aujourd'hui (c'est HA qui historise)
+- ❌ **Sensors limités** : Suite à des changements du site BWT MonService, seuls les sensors basés sur l'API AJAX et les informations basiques de l'appareil sont disponibles
 - ⏱️ **Serveur lent** : Le serveur BWT **EST** lent (10-15 secondes lors de la première connexion)
 
 ## Contribuer

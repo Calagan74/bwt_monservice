@@ -39,15 +39,6 @@
       "regenerations_today": {
         "name": "Régénérations"
       },
-      "hardness_in": {
-        "name": "Dureté entrée"
-      },
-      "hardness_out": {
-        "name": "Dureté sortie"
-      },
-      "water_pressure": {
-        "name": "Pression réseau"
-      },
       "last_seen": {
         "name": "Dernière connexion"
       },
@@ -56,18 +47,6 @@
       },
       "service_date": {
         "name": "Mise en service"
-      },
-      "holiday_mode": {
-        "name": "Mode vacances"
-      },
-      "salt_type": {
-        "name": "Type de sel"
-      },
-      "regen_start_hour": {
-        "name": "Heure régénération"
-      },
-      "wifi_signal": {
-        "name": "Signal WiFi"
       }
     },
     "binary_sensor": {

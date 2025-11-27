@@ -33,6 +33,7 @@ class BWTSensorEntityDescription(SensorEntityDescription):
 
 
 SENSORS: tuple[BWTSensorEntityDescription, ...] = (
+    # Sensors from AJAX endpoint (working)
     BWTSensorEntityDescription(
         key="water_consumption",
         translation_key="water_consumption",
@@ -49,31 +50,7 @@ SENSORS: tuple[BWTSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL,
         value_fn=lambda data: data.get("regen_count"),
     ),
-    BWTSensorEntityDescription(
-        key="hardness_in",
-        translation_key="hardness_in",
-        native_unit_of_measurement="°f",
-        icon="mdi:water-opacity",
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.get("hardness_in"),
-    ),
-    BWTSensorEntityDescription(
-        key="hardness_out",
-        translation_key="hardness_out",
-        native_unit_of_measurement="°f",
-        icon="mdi:water-check",
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda data: data.get("hardness_out"),
-    ),
-    BWTSensorEntityDescription(
-        key="water_pressure",
-        translation_key="water_pressure",
-        native_unit_of_measurement=UnitOfPressure.BAR,
-        device_class=SensorDeviceClass.PRESSURE,
-        state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:gauge",
-        value_fn=lambda data: data.get("water_pressure"),
-    ),
+    # Sensors from HTML device info section (working)
     BWTSensorEntityDescription(
         key="last_seen",
         translation_key="last_seen",
@@ -94,33 +71,14 @@ SENSORS: tuple[BWTSensorEntityDescription, ...] = (
         icon="mdi:calendar",
         value_fn=lambda data: _parse_date(data.get("service_date")),
     ),
-    BWTSensorEntityDescription(
-        key="holiday_mode",
-        translation_key="holiday_mode",
-        icon="mdi:airplane",
-        value_fn=lambda data: data.get("holiday_mode"),
-    ),
-    BWTSensorEntityDescription(
-        key="salt_type",
-        translation_key="salt_type",
-        icon="mdi:shaker",
-        value_fn=lambda data: data.get("salt_type"),
-    ),
-    BWTSensorEntityDescription(
-        key="regen_start_hour",
-        translation_key="regen_start_hour",
-        icon="mdi:clock-start",
-        value_fn=lambda data: data.get("regen_start_hour"),
-    ),
-    BWTSensorEntityDescription(
-        key="wifi_signal",
-        translation_key="wifi_signal",
-        native_unit_of_measurement="dBm",
-        device_class=SensorDeviceClass.SIGNAL_STRENGTH,
-        state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:wifi",
-        value_fn=lambda data: data.get("wifi_signal"),
-    ),
+    # Removed sensors (HTML params parsing no longer working due to website changes):
+    # - hardness_in (Dureté d'entrée)
+    # - hardness_out (Dureté de sortie)
+    # - water_pressure (Pression réseau)
+    # - holiday_mode (Mode vacances)
+    # - salt_type (Type de sel)
+    # - regen_start_hour (Heure régénération)
+    # - wifi_signal (Signal WiFi)
 )
 
 

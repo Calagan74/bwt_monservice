@@ -377,10 +377,14 @@ class BWTApiClient:
             raise ConnectionError("Timeout fetching AJAX data") from err
 
     async def _fetch_html_data(self) -> dict[str, Any]:
-        """Fetch device configuration from HTML page.
+        """Fetch device basic info from HTML page.
+
+        Extracts only device name, serial number, and service date.
+        Configuration parameters (hardness, pressure, etc.) are no longer
+        available due to website changes.
 
         Returns:
-            Dictionary containing HTML data
+            Dictionary containing device name, serial number, and service date
 
         Raises:
             ConnectionError: If request fails
@@ -436,45 +440,6 @@ class BWTApiClient:
                             except ValueError:
                                 _LOGGER.debug("Failed to parse service_date: %s", date_str)
                                 data["service_date"] = date_str
-
-                # Extract configuration parameters
-                params_labels = soup.find_all("div", class_="params-label")
-                params_values = soup.find_all("div", class_="params-value")
-
-                for label_elem, value_elem in zip(params_labels, params_values):
-                    label = label_elem.get_text(strip=True).lower()
-                    value = value_elem.get_text(strip=True)
-
-                    # Skip empty values
-                    if not value:
-                        continue
-
-                    if "dureté d'entrée" in label or "durete d'entree" in label or "dureté d'entrée" in label:
-                        try:
-                            data["hardness_in"] = int(value)
-                        except ValueError:
-                            _LOGGER.debug("Failed to parse hardness_in value: %s", value)
-                    elif "dureté de sortie" in label or "durete de sortie" in label or "dureté de sortie" in label:
-                        try:
-                            data["hardness_out"] = int(value)
-                        except ValueError:
-                            _LOGGER.debug("Failed to parse hardness_out value: %s", value)
-                    elif "pression" in label and ("réseau" in label or "reseau" in label):
-                        try:
-                            data["water_pressure"] = int(value)
-                        except ValueError:
-                            _LOGGER.debug("Failed to parse water_pressure value: %s", value)
-                    elif "mode vacances" in label:
-                        data["holiday_mode"] = value
-                    elif "type de sel" in label:
-                        data["salt_type"] = value
-                    elif "heure" in label and "régénération" in label:
-                        data["regen_start_hour"] = value
-                    elif "wi-fi" in label and "signal" in label:
-                        try:
-                            data["wifi_signal"] = int(value)
-                        except ValueError:
-                            _LOGGER.debug("Failed to parse wifi_signal value: %s", value)
 
                 _LOGGER.debug("HTML data extracted: %s", data)
                 return data
